@@ -1,6 +1,7 @@
 package com.empresa.API_empresa.controllers;
 
 import com.empresa.API_empresa.endereco.Endereco;
+import com.empresa.API_empresa.endereco.EnderecoRepository;
 import com.empresa.API_empresa.funcionario.entities.DadosCadastroFuncionario;
 import com.empresa.API_empresa.funcionario.entities.Funcionario;
 import com.empresa.API_empresa.funcionario.entities.FuncionarioRepository;
@@ -19,10 +20,17 @@ public class FuncionarioController {
     @Autowired
     private FuncionarioRepository repository;
 
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+
     @PostMapping
     @Transactional
-    public void cadastrarFuncionario(@RequestBody DadosCadastroFuncionario dados){
-        repository.save(new Funcionario(dados));
+    public void cadastrarFuncionario(@RequestBody DadosCadastroFuncionario dados) {
+        Funcionario funcionario = new Funcionario(dados);
+        repository.save(funcionario);
+
+        Endereco endereco = new Endereco(dados.endereco(), funcionario);
+        enderecoRepository.save(endereco);
     }
 
 }
