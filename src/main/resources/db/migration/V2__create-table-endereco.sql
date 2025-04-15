@@ -1,4 +1,3 @@
-
 create table endereco (
     id bigint not null auto_increment,
     logradouro varchar(100) not null,
@@ -8,8 +7,8 @@ create table endereco (
     numero varchar(20),
     uf char(2) not null,
     cidade varchar(100) not null,
-    id_funcionario bigint not null,  -- Chave estrangeira para a tabela funcionarios
+    id_funcionario bigint not null,
 
     primary key(id),
-    foreign key(id_funcionario) references funcionarios(id) -- A chave estrangeira
+    foreign key(id_funcionario) references funcionarios(id)
 );

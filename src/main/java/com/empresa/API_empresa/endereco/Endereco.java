@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity(name = "Endereco")
-@Table(name = "enderecos")
+@Table(name = "endereco")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,7 +27,7 @@ public class Endereco {
     private String uf;
 
     @OneToOne
-    @JoinColumn(name = "funcionario_id")
+    @JoinColumn(name = "id_funcionario")
     private Funcionario funcionario;
 
     public Endereco(DadosCadastroEndereco endereco, Funcionario funcionario) {
