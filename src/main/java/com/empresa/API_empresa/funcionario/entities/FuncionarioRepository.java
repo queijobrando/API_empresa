@@ -1,4 +1,6 @@
 package com.empresa.API_empresa.funcionario.entities;
 
-public interface FuncionarioRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
 }

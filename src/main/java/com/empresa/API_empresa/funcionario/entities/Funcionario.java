@@ -29,6 +29,13 @@ public class Funcionario {
 
     @Embedded
     private Endereco endereco;
+
+    public Funcionario(DadosCadastroFuncionario dados) {
+        this.nome = dados.nome();
+        this.email = dados.email();
+        this.cargo = dados.cargo();
+        this.endereco = new Endereco(dados.endereco());
+    }
     /*
     private Setor setor;
      */
