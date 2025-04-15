@@ -1,17 +1,35 @@
 package com.empresa.API_empresa.funcionario.entities;
 
-import com.empresa.API_empresa.endereco.DadosCadastroEndereco;
 import com.empresa.API_empresa.endereco.Endereco;
 import com.empresa.API_empresa.funcionario.enums.Cargo;
 import com.empresa.API_empresa.setor.entities.Setor;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Entity
+@Entity(name = "Funcionario")
+@Table(name = "medicos")
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Funcionario {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
     private String email;
+
+    @Enumerated(EnumType.STRING)
     private Cargo cargo;
+
+    @Embedded
     private Endereco endereco;
+    /*
     private Setor setor;
+     */
 }
