@@ -1,6 +1,5 @@
 package com.empresa.API_empresa.funcionario.entities;
 
-import com.empresa.API_empresa.endereco.Endereco;
 import com.empresa.API_empresa.funcionario.enums.Cargo;
 import com.empresa.API_empresa.setor.entities.Setor;
 import jakarta.persistence.*;
@@ -27,10 +26,16 @@ public class Funcionario {
     @Enumerated(EnumType.STRING)
     private Cargo cargo;
 
-    public Funcionario(DadosCadastroFuncionario dados) {
+    @OneToOne
+    @JoinColumn(name = "setor_id")
+    private Setor setor;
+
+
+    public Funcionario(DadosCadastroFuncionario dados, Setor setor) {
         this.nome = dados.nome();
         this.email = dados.email();
         this.cargo = dados.cargo();
+        this.setor = setor;
     }
     /*
     private Setor setor;
