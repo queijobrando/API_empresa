@@ -37,6 +37,12 @@ public class Funcionario {
         this.cargo = dados.cargo();
         this.setor = setor;
     }
+
+    public void atualizarInformacoes(AtualizarDadosFuncionario dados) {
+        if (dados.email() != null){
+            this.email = dados.email();
+        }
+    }
     /*
     private Setor setor;
      */

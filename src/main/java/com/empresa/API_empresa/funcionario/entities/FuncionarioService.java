@@ -7,6 +7,8 @@ import com.empresa.API_empresa.setor.entities.SetorRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FuncionarioService {
 
@@ -33,4 +35,13 @@ public class FuncionarioService {
         Endereco endereco = new Endereco(dados.endereco(), funcionario);
         enderecoRepository.save(endereco);
     }
+
+    public List<Funcionario> listarFuncionario(){
+        return funcionarioRepository.findAll();
+    }
+
+    public Funcionario carregarFuncionario(Long id){
+        return funcionarioRepository.getReferenceById(id);
+    }
+
 }
