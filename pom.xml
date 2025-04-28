@@ -109,7 +109,7 @@
 				<configuration>
 					<url>jdbc:mysql://localhost:3306/empresa_api</url>
 					<user>root</user>
-					<password>Macaco2134*</password>
+					<password>123456</password>
 					<schemas>
 						<schema>public</schema>
 					</schemas>

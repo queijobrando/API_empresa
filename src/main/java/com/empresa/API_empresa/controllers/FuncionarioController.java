@@ -2,6 +2,7 @@ package com.empresa.API_empresa.controllers;
 
 import com.empresa.API_empresa.funcionario.entities.DadosCadastroFuncionario;
 import com.empresa.API_empresa.funcionario.entities.FuncionarioService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +21,7 @@ public class FuncionarioController {
     }
 
     @PostMapping
-    public void cadastrarFuncionario(@RequestBody DadosCadastroFuncionario dados) {
+    public void cadastrarFuncionario(@RequestBody @Valid DadosCadastroFuncionario dados) {
         funcionarioService.cadastrarFuncionario(dados);
     }
 
