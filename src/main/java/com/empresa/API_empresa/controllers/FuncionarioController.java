@@ -40,6 +40,12 @@ public class FuncionarioController {
         return ResponseEntity.ok(lista); // 200 ok
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity detalhesFuncionario(@PathVariable Long id){
+        var funcionario = funcionarioService.carregarFuncionario(id);
+        return ResponseEntity.ok(new DadosDetalhamentoFuncionario(funcionario));
+    }
+
     @PutMapping
     @Transactional
     public ResponseEntity atualizar(@RequestBody AtualizarDadosFuncionario dados){
