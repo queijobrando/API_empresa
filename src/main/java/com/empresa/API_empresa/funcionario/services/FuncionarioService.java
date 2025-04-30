@@ -1,7 +1,10 @@
-package com.empresa.API_empresa.funcionario.entities;
+package com.empresa.API_empresa.funcionario.services;
 
 import com.empresa.API_empresa.endereco.Endereco;
 import com.empresa.API_empresa.endereco.EnderecoRepository;
+import com.empresa.API_empresa.funcionario.dtos.DadosCadastroFuncionario;
+import com.empresa.API_empresa.funcionario.entities.Funcionario;
+import com.empresa.API_empresa.funcionario.entities.FuncionarioRepository;
 import com.empresa.API_empresa.setor.entities.Setor;
 import com.empresa.API_empresa.setor.entities.SetorRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +28,7 @@ public class FuncionarioService {
     }
 
     @Transactional
-    public void cadastrarFuncionario(DadosCadastroFuncionario dados) {
+    public Funcionario cadastrarFuncionario(DadosCadastroFuncionario dados) {
         Setor setor = setorRepository.findById(dados.idSetor())
                 .orElseThrow(() -> new RuntimeException("Setor não encontrado"));
 
@@ -34,6 +37,8 @@ public class FuncionarioService {
 
         Endereco endereco = new Endereco(dados.endereco(), funcionario);
         enderecoRepository.save(endereco);
+
+        return funcionario;
     }
 
     public List<Funcionario> listarFuncionario(){

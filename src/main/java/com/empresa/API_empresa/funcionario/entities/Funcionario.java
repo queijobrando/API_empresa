@@ -1,5 +1,7 @@
 package com.empresa.API_empresa.funcionario.entities;
 
+import com.empresa.API_empresa.funcionario.dtos.AtualizarDadosFuncionario;
+import com.empresa.API_empresa.funcionario.dtos.DadosCadastroFuncionario;
 import com.empresa.API_empresa.funcionario.enums.Cargo;
 import com.empresa.API_empresa.setor.entities.Setor;
 import jakarta.persistence.*;

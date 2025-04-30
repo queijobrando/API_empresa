@@ -1,4 +1,4 @@
-package com.empresa.API_empresa.funcionario.entities;
+package com.empresa.API_empresa.funcionario.dtos;
 
 import jakarta.validation.constraints.NotNull;
 

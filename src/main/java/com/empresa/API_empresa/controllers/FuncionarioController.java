@@ -1,13 +1,16 @@
 package com.empresa.API_empresa.controllers;
 
-import com.empresa.API_empresa.funcionario.entities.AtualizarDadosFuncionario;
-import com.empresa.API_empresa.funcionario.entities.DadosCadastroFuncionario;
+import com.empresa.API_empresa.funcionario.dtos.AtualizarDadosFuncionario;
+import com.empresa.API_empresa.funcionario.dtos.DadosCadastroFuncionario;
+import com.empresa.API_empresa.funcionario.dtos.DadosDetalhamentoFuncionario;
 import com.empresa.API_empresa.funcionario.entities.Funcionario;
-import com.empresa.API_empresa.funcionario.entities.FuncionarioService;
+import com.empresa.API_empresa.funcionario.services.FuncionarioService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -23,26 +26,34 @@ public class FuncionarioController {
     }
 
     @PostMapping
-    public void cadastrarFuncionario(@RequestBody @Valid DadosCadastroFuncionario dados) {
-        funcionarioService.cadastrarFuncionario(dados);
+    public ResponseEntity cadastrarFuncionario(@RequestBody @Valid DadosCadastroFuncionario dados, UriComponentsBuilder uriComponentsBuilder) {
+        Funcionario funcionario = funcionarioService.cadastrarFuncionario(dados);
+
+        var uri = uriComponentsBuilder.path("funcionarios/{id}").buildAndExpand(funcionario.getId()).toUri(); //201
+
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoFuncionario(funcionario));
     }
 
     @GetMapping
-    public List<Funcionario> listarFuncionarios(){
-        return funcionarioService.listarFuncionario();
+    public ResponseEntity<List<Funcionario>> listarFuncionarios(){
+        var lista = funcionarioService.listarFuncionario();
+        return ResponseEntity.ok(lista); // 200 ok
     }
 
     @PutMapping
     @Transactional
-    public void atualizar(@RequestBody AtualizarDadosFuncionario dados){
+    public ResponseEntity atualizar(@RequestBody AtualizarDadosFuncionario dados){
         var funcionario = funcionarioService.carregarFuncionario(dados.id());
         funcionario.atualizarInformacoes(dados);
+
+        return ResponseEntity.ok(new DadosDetalhamentoFuncionario(funcionario)); // NÃO É RECOMENDADO RECEBER E ENVIAR DADOS DA ENTIDADE JPA, DEVE CRIAR UM DTO
     }
 
     @DeleteMapping("/{id}")
     @Transactional
-    public void excluir(@PathVariable Long id){
+    public ResponseEntity excluir(@PathVariable Long id){
         funcionarioService.excluirFuncionario(id);
+        return ResponseEntity.noContent().build(); //.build constroi o objeto noContent responseENTITY 204
     }
 
 }
