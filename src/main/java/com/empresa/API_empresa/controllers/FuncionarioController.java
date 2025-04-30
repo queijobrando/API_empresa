@@ -39,4 +39,10 @@ public class FuncionarioController {
         funcionario.atualizarInformacoes(dados);
     }
 
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluir(@PathVariable Long id){
+        funcionarioService.excluirFuncionario(id);
+    }
+
 }

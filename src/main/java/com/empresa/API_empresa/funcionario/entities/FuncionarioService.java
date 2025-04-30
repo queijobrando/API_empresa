@@ -44,4 +44,9 @@ public class FuncionarioService {
         return funcionarioRepository.getReferenceById(id);
     }
 
+    public void excluirFuncionario(Long id){
+        enderecoRepository.deleteByFuncionarioId(id);
+        funcionarioRepository.deleteById(id);
+    }
+
 }
